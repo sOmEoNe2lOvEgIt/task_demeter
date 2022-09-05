@@ -15,13 +15,15 @@ PLUGIN_TYPE = task
 PLUGIN_NAME = demeter
 PLUGIN_FILE = $(PLUGIN_TYPE)_$(PLUGIN_NAME).so
 DEMETER_LIB_DIR = /home/atos_projects/prep_demeter
+DEMETER_RUN_PATH = /shared/
 
 SRC_FILES = src/demeter_task.c		\
 			src/get_conf_path.c		\
 			src/is_writable_path.c	\
+			src/get_task_info.c		\
 
 CC		= gcc
-CFLAGS	?= -Wall -fPIC -g -Iinclude -I$(SLURM_INC_DIR) -I$(SLURM_BUILD_DIR)
+CFLAGS	?= -Wall -fPIC -g -Iinclude -I$(SLURM_INC_DIR) -I$(SLURM_BUILD_DIR) -I$(DEMETER_LIB_DIR)/include -Wl,-rpath=$(DEMETER_RUN_PATH)
 LDFLAGS	?= --shared -L. -L$(DEMETER_LIB_DIR) -ldemeter
 
 all:	$(PLUGIN_FILE)
