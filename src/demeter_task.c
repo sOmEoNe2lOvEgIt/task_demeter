@@ -7,7 +7,6 @@
 #include "src/common/log.h"
 #include "src/slurmd/common/task_plugin.h"
 #include "demeter_task.h"
-#include "demeter.h"
 
 const char plugin_name[]        = "task demeter plugin";
 const char plugin_type[]        = "task/demeter :";

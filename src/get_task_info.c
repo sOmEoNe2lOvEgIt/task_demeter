@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include "demeter_task.h"
-#include "demeter.h"
 
 job_id_info_t *get_task_info(stepd_step_rec_t *job)
 {
