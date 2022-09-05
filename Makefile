@@ -14,6 +14,7 @@ SLURM_BUILD_DIR = /root/rpmbuild/BUILD/slurm-$(SLURM_BUILD)
 PLUGIN_TYPE = task
 PLUGIN_NAME = demeter
 PLUGIN_FILE = $(PLUGIN_TYPE)_$(PLUGIN_NAME).so
+DEMETER_LIB_DIR = /home/atos_projects/prep_demeter
 
 SRC_FILES = src/demeter_task.c		\
 			src/get_conf_path.c		\
@@ -21,7 +22,7 @@ SRC_FILES = src/demeter_task.c		\
 
 CC		= gcc
 CFLAGS	?= -Wall -fPIC -g -Iinclude -I$(SLURM_INC_DIR) -I$(SLURM_BUILD_DIR)
-LDFLAGS	?= --shared -L. -L/home/atos_projects/prep_demeter -ldemeter
+LDFLAGS	?= --shared -L. -L$(DEMETER_LIB_DIR) -ldemeter
 
 all:	$(PLUGIN_FILE)
 
