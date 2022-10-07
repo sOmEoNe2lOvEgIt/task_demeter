@@ -40,7 +40,8 @@ extern int task_p_post_term (stepd_step_rec_t *job, stepd_step_task_info_t *task
 	cgroup_data = gather_cgroup(task_info, demeter_conf);
 	if (cgroup_data == NULL)
 		return SLURM_ERROR;
-	log_cgroup(cgroup_data, task_info, demeter_conf);
+	// log_cgroup(cgroup_data, task_info, demeter_conf);
+	transfer_log_cgroup(cgroup_data, task_info, demeter_conf);
 	free_cgroup(cgroup_data);
 	free_job_id_info(task_info);
 	return SLURM_SUCCESS;
