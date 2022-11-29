@@ -37,14 +37,15 @@ extern int task_p_post_term (stepd_step_rec_t *job, stepd_step_task_info_t *task
 {
     if ( !demeter_conf || (demeter_conf && !demeter_conf->using_task_plugin)) {
         free_job_id_info(task_info);
-        write_log_to_file(demeter_conf,"task plugin not used", INFO, 0);
+        if (demeter_conf)
+            write_log_to_file(demeter_conf,"task plugin not used", INFO, 0);
         return SLURM_SUCCESS;
     }
-    task_info = get_task_info(job);
-    if (task_info == NULL)
+    write_log_to_file(demeter_conf,"task plugin used", INFO, 0);
+    // sstat_pull(job->array_job_id,  job->step_id.step_id, demeter_conf);
+    if (!(task_info = get_task_info(job)))
         return SLURM_ERROR;
-    cgroup_data = gather_cgroup(task_info, demeter_conf);
-    if (cgroup_data == NULL)
+    if (!(cgroup_data = gather_cgroup(task_info, demeter_conf)))
         return SLURM_ERROR;
     transfer_log_cgroup(cgroup_data, task_info, demeter_conf);
     free_cgroup(cgroup_data);
@@ -100,12 +101,12 @@ extern int task_p_post_set_affinity(stepd_step_rec_t *job, uint32_t node_tid)
     return SLURM_SUCCESS;
 }
 
-extern int task_p_post_step (stepd_step_rec_t *job)
+extern int task_p_add_pid (pid_t pid)
 {
     return SLURM_SUCCESS;
 }
 
-extern int task_p_add_pid (pid_t pid)
+extern int task_p_post_step (stepd_step_rec_t *job)
 {
     return SLURM_SUCCESS;
 }
