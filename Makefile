@@ -16,7 +16,7 @@ SRC_FILES = src/demeter_task.c		\
 			src/get_task_info.c		\
 
 CC		= gcc
-CFLAGS	?= -Wall -fPIC -g3 -Iinclude -I$(SLURM_INC_DIR) -I$(DEMETER_LIB_DIR)/include -Wl,-rpath=$(DEMETER_RUN_PATH)
+CFLAGS	?= -std=gnu11 -Wall -fPIC -Iinclude -I$(SLURM_INC_DIR) -I$(DEMETER_LIB_DIR)/include -Wl,-rpath=$(DEMETER_RUN_PATH)
 LDFLAGS	?= -shared -L. -L$(DEMETER_LIB_DIR) -ldemeter
 
 all:	$(PLUGIN_FILE)
