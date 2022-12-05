@@ -21,7 +21,7 @@ extern int init (void)
     demeter_conf = read_conf();
     if (demeter_conf == NULL)
         return SLURM_ERROR;
-    debug("%s loaded", plugin_name);
+    info("%s loaded", plugin_name);
     return SLURM_SUCCESS;
 }
 
